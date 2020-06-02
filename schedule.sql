@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 02 2020 г., 19:27
+-- Время создания: Июн 02 2020 г., 19:44
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -55,6 +55,14 @@ CREATE TABLE `gender` (
   `name` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `gender`
+--
+
+INSERT INTO `gender` (`gender_id`, `name`) VALUES
+(1, 'Мужской'),
+(2, 'Женский');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +89,17 @@ CREATE TABLE `lesson_num` (
   `time_lesson` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `lesson_num`
+--
+
+INSERT INTO `lesson_num` (`lesson_num_id`, `name`, `time_lesson`) VALUES
+(1, '1 пара', '08:30:00'),
+(2, '2 пара', '10:10:00'),
+(3, '3 пара', '12:20:00'),
+(4, '4 пара', '13:50:00'),
+(5, '5 пара', '15:40:00');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +125,15 @@ CREATE TABLE `otdel` (
   `active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `otdel`
+--
+
+INSERT INTO `otdel` (`otdel_id`, `name`, `active`) VALUES
+(1, 'Программирование', 1),
+(2, 'Общеобразовательные дисциплины', 1),
+(3, 'Строительство', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -118,6 +146,16 @@ CREATE TABLE `role` (
   `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `role`
+--
+
+INSERT INTO `role` (`role_id`, `sys_name`, `name`, `active`) VALUES
+(1, 'admin', 'Администратор', 1),
+(2, 'manager', 'Менеджер', 1),
+(3, 'teacher', 'Преподаватель', 1),
+(4, 'student', 'Студент', 1);
 
 -- --------------------------------------------------------
 
@@ -145,6 +183,17 @@ CREATE TABLE `special` (
   `otdel_id` smallint(6) NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `special`
+--
+
+INSERT INTO `special` (`special_id`, `name`, `otdel_id`, `active`) VALUES
+(1, 'Информационные системы', 1, 1),
+(2, 'Нефтегазовое дело', 2, 1),
+(3, 'Строительство и эксплуатация', 3, 1),
+(4, 'Электроснабжение', 3, 1),
+(5, 'Вычислительная техника', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -310,7 +359,7 @@ ALTER TABLE `day`
 -- AUTO_INCREMENT для таблицы `gender`
 --
 ALTER TABLE `gender`
-  MODIFY `gender_id` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `gender_id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `groups`
@@ -322,7 +371,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT для таблицы `lesson_num`
 --
 ALTER TABLE `lesson_num`
-  MODIFY `lesson_num_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lesson_num_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `lesson_plan`
@@ -334,13 +383,13 @@ ALTER TABLE `lesson_plan`
 -- AUTO_INCREMENT для таблицы `otdel`
 --
 ALTER TABLE `otdel`
-  MODIFY `otdel_id` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `otdel_id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `schedule`
@@ -352,7 +401,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT для таблицы `special`
 --
 ALTER TABLE `special`
-  MODIFY `special_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `special_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `subject`
