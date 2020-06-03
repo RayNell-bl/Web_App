@@ -1,5 +1,4 @@
 <?php
-require('./Config.class.php');
 abstract class BaseMap extends Config {
 	/**
 * @var PDO

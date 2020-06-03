@@ -123,7 +123,7 @@ desired effect
             <!-- Sidebar user panel (optional) -->
 
             <!-- Sidebar Menu -->
-            <?php require_once 'template//menu.php'; ?>
+            <?php require_once './template/menu.php'; ?>
             <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
