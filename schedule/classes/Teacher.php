@@ -11,6 +11,5 @@ class Teacher extends Table
             return true;
         }
         return false;
-        //return false;
     }
 }
