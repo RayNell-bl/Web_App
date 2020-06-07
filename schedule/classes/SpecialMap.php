@@ -3,7 +3,7 @@
 
 class SpecialMap extends BaseMap
 {
-	public function arrSpecials(){
+    public function arrSpecials(){
         $res = $this->db->query("SELECT special_id AS id, name AS value FROM special");
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -39,7 +39,7 @@ class SpecialMap extends BaseMap
     }
 
     private function update(Special $special){
-        $name = $this->db->quote($groups->name);
+        $name = $this->db->quote($gruppa->name);
         if ( $this->db->exec("UPDATE special SET name = $name,". " date_begin = $special->otdel_id, $special->active  WHERE special_id = ".$special->special_id) == 1) {
             return true;
         }
@@ -63,5 +63,6 @@ class SpecialMap extends BaseMap
         }
     return false;
     }
+
+
 }
-?>
