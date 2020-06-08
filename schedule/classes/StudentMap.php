@@ -5,7 +5,7 @@ class StudentMap extends BaseMap
 {
 	public function findById($id=null){
 		if ($id) {
-			$res = $this->db->query("SELECT user_id, group_id, num_zach FROM student WHERE user_id = $id");
+			$res = $this->db->query("SELECT user_id, `group_id`, num_zach FROM student WHERE user_id = $id");
 			$student = $res->fetchObject("Student");
 			if ($student) {
 				return $student;
@@ -29,7 +29,7 @@ class StudentMap extends BaseMap
 
 	private function insert(Student $student){
 		$numZach = $this-> db->quote($student->num_zach);
-		if ($this->db->exec("INSERT INTO student(user_id, group_id, num_zach) VALUES($student->user_id, $student->group_id, $numZach)") == 1) {
+		if ($this->db->exec("INSERT INTO student(user_id, `group_id`, num_zach) VALUES($student->user_id, $student->`group_id`, $numZach)") == 1) {
 			return true;
 		}
 	return false;
@@ -37,14 +37,14 @@ class StudentMap extends BaseMap
 
 	private function update(Student $student){
 		$numZach = $this-> db->quote($student->num_zach);
-		if ($this->db->exec("UPDATE student SET group_id = $student->group_id, num_zach= $numZach WHERE user_id=".$student->user_id) == 1) {
+		if ($this->db->exec("UPDATE student SET `group_id` = $student->`group_id`, num_zach= $numZach WHERE user_id=".$student->user_id) == 1) {
 			return true;
 		}
 	return false;
 	}
 
 	public function findAll($ofset=0, $limit=30){
-		$res = $this->db->query("SELECT user.user_id, CONCAT(user.lastname,' ', user.firstname, ' ', user.patronymic) AS fio, user.birthday, ". " gender.name AS gender, groups.name AS groups, role.name AS role FROM user INNER JOIN student ON user.user_id=student.user_id ". "INNER JOIN gender ON user.gender_id=gender.gender_id INNER JOIN groups ON student.group_id=groups.group_id" . " INNER JOIN role ON user.role_id=role.role_id LIMIT $ofset, $limit");
+		$res = $this->db->query("SELECT user.user_id, CONCAT(user.lastname,' ', user.firstname, ' ', user.patronymic) AS fio, user.birthday, ". " gender.name AS gender, groups.name AS `groups`, role.name AS role FROM user INNER JOIN student ON user.user_id=student.user_id ". "INNER JOIN gender ON user.gender_id=gender.gender_id INNER JOIN `groups` ON student.group_id=groups.group_id" . " INNER JOIN role ON user.role_id=role.role_id LIMIT $ofset, $limit");
 		return $res->fetchAll(PDO::FETCH_OBJ);
 	}
 
@@ -56,7 +56,7 @@ class StudentMap extends BaseMap
 
 	public function findProfileById($id=null){
 		if ($id) {
-			$res = $this->db->query("SELECT student.user_id, groups.name AS groups FROM student ". "INNER JOIN groups ON student.group_id=groups.group_id WHERE student.user_id =$id");
+			$res = $this->db->query("SELECT student.user_id, groups.name AS `groups` FROM student ". "INNER JOIN `groups` ON student.group_id=groups.group_id WHERE student.user_id =$id");
 			return $res->fetch(PDO::FETCH_OBJ);
 		}
 		return false; 

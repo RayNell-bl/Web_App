@@ -5,7 +5,7 @@ class LessonPlanMap extends BaseMap
 {
 	public function existsPlan(LessonPlan $plan){
        $res = $this->db->query("SELECT lesson_plan_id FROM lesson_plan "
-           . "WHERE group_id = $plan->group_id AND
+           . "WHERE `group_id` = $plan->`group_id` AND
 subject_id = $plan->subject_id AND user_id = $plan->user_id");
        if ($res->fetchColumn() > 0) {
            return true;
@@ -15,8 +15,8 @@ subject_id = $plan->subject_id AND user_id = $plan->user_id");
 
 
     public function save(LessonPlan $plan){
-        if ($this->db->exec("INSERT INTO lesson_plan(group_id,subject_id, user_id)"
-                . " VALUES($plan->group_id,$plan->subject_id,$plan->user_id)") == 1) {
+        if ($this->db->exec("INSERT INTO lesson_plan(`group_id`,subject_id, user_id)"
+                . " VALUES($plan->`group_id`,$plan->subject_id,$plan->user_id)") == 1) {
             return true;
         }
         return false;
@@ -26,10 +26,10 @@ subject_id = $plan->subject_id AND user_id = $plan->user_id");
     public function findByTeacherId($id=null){
         if ($id) {
             $res = $this->db->query("SELECT
-lesson_plan.lesson_plan_id, groups.name AS gruppa,
+lesson_plan.lesson_plan_id, `groups.name` AS gruppa,
 subject.name AS subject, "
                 . "subject.hours FROM lesson_plan
-INNER JOIN groups ON
+INNER JOIN `groups` ON
 lesson_plan.group_id=groups.group_id "
                 . "INNER JOIN subject ON
 lesson_plan.subject_id=subject.subject_id WHERE
@@ -71,11 +71,11 @@ user.user_id "
             $res = $this->db->query("SELECT
             lesson_plan.lesson_plan_id AS id, CONCAT(groups.name,' -> ',subject.name) AS value"
             . " FROM lesson_plan INNER JOIN
-            groups ON lesson_plan.group_id=groups.group_id "
+            `groups` ON `lesson_plan.group_id`=`groups.group_id` "
             . "INNER JOIN subject ON
             lesson_plan.subject_id=subject.subject_id "
             . "WHERE lesson_plan.user_id=$id
-            ORDER BY groups.name, subject.name");
+            ORDER BY `groups.name`, subject.name");
             return $res->fetchAll(PDO::FETCH_ASSOC);
             }
             return [];  
@@ -84,7 +84,7 @@ user.user_id "
     public function findById($id=null){
         if ($id) {
             $res = $this->db->query("SELECT lesson_plan_id,
-            group_id, subject_id, user_id FROM lesson_plan WHERE
+            `group_id`, subject_id, user_id FROM lesson_plan WHERE
             lesson_plan_id=$id");
             return $res->fetchObject('LessonPlan');
             }

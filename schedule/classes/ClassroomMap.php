@@ -23,7 +23,7 @@ class ClassroomMap extends BaseMap
         return false;
     }
 
-    private function insert(Classroom $classroom){///////////////////////////////////////////////////////////////////////////////////////////////////////
+    private function insert(Classroom $classroom){
         $name = $this->db->quote($classroom->name);
         $active = $this->db->quote($classroom->active);
         if ($this->db->exec("INSERT INTO classroom(name, active)". " VALUES($name, $active)") == 1) {
